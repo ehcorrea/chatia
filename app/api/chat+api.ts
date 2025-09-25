@@ -1,15 +1,11 @@
-import { createDeepSeek } from "@ai-sdk/deepseek";
+import { deepseek } from "@ai-sdk/deepseek";
 import { convertToModelMessages, streamText, UIMessage } from "ai";
-
-const client = createDeepSeek({
-  apiKey: "sk-cf829b8d30654f4a91189531bcfa7a3d",
-});
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: client("deepseek-chat"),
+    model: deepseek("deepseek-chat"),
     messages: convertToModelMessages(messages),
   });
 
